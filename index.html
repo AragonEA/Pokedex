@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pokedex</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P">
+    <link rel="stylesheet" href="./node_modules/nes.css/css/nes.min.css">
+    <link rel="stylesheet" href="src/css/main.css">
+</head>
+
+<body>
+    <header>
+        <img id="logo" src="src/img/pokemon-logo.png" alt="pokemon-logo">
+    </header>
+    <main>
+
+                <div id="pokemon-data" class="nes-container is-centered background-white border-radius">
+                    <img id="pokemon-img" class="img" alt="pokemon-image">
+                    <p id="pokemon-name" class="title">NAME</p>
+                    <div class="list">
+                        <ul class="nes-list is-disc" id="pokemon-stats">
+                            <li id="pokemon-order">ORDER: </li>
+                            <li id="pokemon-type">TYPE: </li>
+                            <li id="pokemon-height">HEIGHT: M</li>
+                            <li id="pokemon-weight">WEIGHT: KG</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="pokemon-list" class="nes-container is-centered background-white border-radius">
+
+
+                </div>
+                <div id="nav-bar" class="">
+                    <button id="previous-btn" type="button" class="nes-btn is-error">Previous</button>
+                    <button id="next-btn" type="button" class="nes-btn">Next</button>
+                </div>
+
+
+    </main>
+    <footer>
+        <a href="https://github.com/AragonEA">AragonEA<i class="nes-icon github is-small"></i></a>
+    </footer>
+
+    <script src="src/js/main.js"></script>
+</body>
+
+</html>
