@@ -1,0 +1,40 @@
+/// <reference types="jquery" \>
+const URL = 'https://pokeapi.co/api/v2/pokemon/?limit=16&offset=0';
+let previousPage = '';
+let nextPage = '';
+const $pokemonList = document.querySelector('#pokemon-list');
+const $pokemonName = document.querySelector('#pokemon-name');
+const $pokemonImg = document.querySelector('#pokemon-img');
+const $pokemonOrder = document.querySelector('#pokemon-order');
+const $pokemonType = document.querySelector('#pokemon-type');
+const $pokemonHeight = document.querySelector('#pokemon-height');
+const $pokemonWeight = document.querySelector('#pokemon-weight');
+const $previousBtn = document.querySelector('#previous-btn');
+const $nextBtn = document.querySelector('#next-btn');
+
+function showPokemons(URL) {
+        fetch(URL)
+            .then(response => response.json())
+            .then(response => {
+                deletePokemonsList();
+                showPokemonList(response.results);
+                previousPage = response.previous;
+                nextPage = response.next;
+            });
+}
+function showPokemonList(pokemons) {
+    Object.keys(pokemons).forEach(pokemon => {
+
+        const $pokemonImg = document.createElement('img');
+        const $pokemonName = document.createElement('p');
+        const $pokemonContainer = document.createElement('div');
+        const pokemonNumber = pokemons[pokemon].url.slice(30).match(/(\d+)/g);
+
+        $pokemonContainer.classList = 'list-item';
+        $pokemonImg.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonNumber}.png`;
+
+        $pokemonList.appendChild($pokemonContainer);
+        $pokemonContainer.appendChild($pokemonImg);
+        $pokemonContainer.appendChild($pokemonName);
+    });
+}
