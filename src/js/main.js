@@ -13,6 +13,7 @@ const $previousBtn = document.querySelector('#previous-btn');
 const $nextBtn = document.querySelector('#next-btn');
 
 function showPokemons(URL) {
+    try {
         fetch(URL)
             .then(response => response.json())
             .then(response => {
@@ -21,7 +22,9 @@ function showPokemons(URL) {
                 previousPage = response.previous;
                 nextPage = response.next;
             });
+    } catch (error) { console.error(error); }
 }
+
 function showPokemonList(pokemons) {
     Object.keys(pokemons).forEach(pokemon => {
 
@@ -41,9 +44,11 @@ function showPokemonList(pokemons) {
 }
 
 function getPokemon(pokemonName) {
+    try {
         return fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}/`)
             .then((response) => response.json())
             .then((data) => showPokemonData(data));
+    } catch (error) { console.error(error); }
 }
 function showPokemonData(pokemonData) {
 
