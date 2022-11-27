@@ -32,9 +32,25 @@ function showPokemonList(pokemons) {
 
         $pokemonContainer.classList = 'list-item';
         $pokemonImg.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonNumber}.png`;
+        $pokemonName.textContent = capitalizeFirstLetter((pokemons[pokemon].name));
 
         $pokemonList.appendChild($pokemonContainer);
         $pokemonContainer.appendChild($pokemonImg);
         $pokemonContainer.appendChild($pokemonName);
     });
+}
+
+function getPokemon(pokemonName) {
+        return fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}/`)
+            .then((response) => response.json())
+            .then((data) => showPokemonData(data));
+}
+function showPokemonData(pokemonData) {
+
+    $pokemonImg.src = pokemonData.sprites["front_default"];
+    $pokemonName.textContent = (`${pokemonData.name}`).toUpperCase();
+    $pokemonOrder.textContent = (`ORDER: ${pokemonData.order}`)
+    $pokemonType.textContent = (`TYPE: ${pokemonData.types[0].type.name}`).toUpperCase();
+    $pokemonHeight.textContent = (`HEIGHT: ${pokemonData.height / 10} M`).toUpperCase();
+    $pokemonWeight.textContent = (`WEIGHT: ${pokemonData.weight / 10} KG`).toUpperCase();
 }
