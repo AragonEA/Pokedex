@@ -39,6 +39,8 @@ a {
   color: black;
 }
 
+@media only screen and (min-width: 1050px) {
+  /* For desktop: */
 
   body {
     background-size: 100%;
@@ -96,3 +98,4 @@ a {
     height: 23px;
   }
 
+}
