@@ -39,6 +39,15 @@ a {
   color: black;
 }
 
+@media only screen and (min-width: 560px) {
+  /* For tablets: */
+
+  #pokemon-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media only screen and (min-width: 400px) and (max-width: 560px) {
   /* For mobile phones: */
 
