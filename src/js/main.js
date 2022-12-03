@@ -12,6 +12,9 @@ const $pokemonWeight = document.querySelector('#pokemon-weight');
 const $previousBtn = document.querySelector('#previous-btn');
 const $nextBtn = document.querySelector('#next-btn');
 
+$previousBtn.addEventListener('click', showPreviousPage);
+$nextBtn.addEventListener('click', showNextPage);
+
 function showPokemons(URL) {
     try {
         fetch(URL)
