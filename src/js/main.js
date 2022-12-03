@@ -60,6 +60,14 @@ function showPokemonData(pokemonData) {
     $pokemonWeight.textContent = (`WEIGHT: ${pokemonData.weight / 10} KG`).toUpperCase();
 }
 
+$pokemonList.onclick = function (event) {
+    const $element = event.target.parentNode;
+    if ($element.classList.contains('list-item')) {
+        const pokemonName = uncapitalizeFirstLetter($element.childNodes[1].innerText);
+        $element.onClick = getPokemon(pokemonName);
+    }
+}
+
 function showPreviousPage() {
     if (previousPage) {
         $previousBtn.classList.remove('is-error');
@@ -79,3 +87,14 @@ function showNextPage() {
     }
 }
 
+function deletePokemonsList() {
+    document.querySelectorAll('.list-item').forEach(item => item.remove());;
+}
+
+function uncapitalizeFirstLetter(string) {
+    return string.charAt(0).toLowerCase() + string.slice(1);
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
