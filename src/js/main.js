@@ -15,6 +15,9 @@ const $nextBtn = document.querySelector('#next-btn');
 $previousBtn.addEventListener('click', showPreviousPage);
 $nextBtn.addEventListener('click', showNextPage);
 
+showPokemons(URL);
+getPokemon("bulbasaur");
+
 function showPokemons(URL) {
     try {
         fetch(URL)
