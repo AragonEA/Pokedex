@@ -59,3 +59,23 @@ function showPokemonData(pokemonData) {
     $pokemonHeight.textContent = (`HEIGHT: ${pokemonData.height / 10} M`).toUpperCase();
     $pokemonWeight.textContent = (`WEIGHT: ${pokemonData.weight / 10} KG`).toUpperCase();
 }
+
+function showPreviousPage() {
+    if (previousPage) {
+        $previousBtn.classList.remove('is-error');
+        showPokemons(previousPage);
+    } else {
+        $previousBtn.classList.add('is-error');
+    }
+}
+
+function showNextPage() {
+    if (nextPage) {
+        $nextBtn.classList.remove('is-error');
+        $previousBtn.classList.remove('is-error');
+        showPokemons(nextPage);
+    } else {
+        $nextBtn.classList.add('is-error');
+    }
+}
+
