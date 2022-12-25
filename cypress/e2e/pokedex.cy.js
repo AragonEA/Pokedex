@@ -74,5 +74,32 @@ context('Pokedex', () => {
     });
 
   });
+
+  describe('pokemon data should load when a pokemon is clicked', () => {
+
+    it('show data when a pokemon is clicked', () => {
+
+      cy.contains('Blastoise').click();
+
+      cy.get('#pokemon-img').should('be.visible');
+      cy.get('#pokemon-name').contains('BLASTOISE');
+      cy.get('#pokemon-order').contains('ORDER: 12');
+      cy.get('#pokemon-type').contains('TYPE: WATER');
+      cy.get('#pokemon-height').contains('HEIGHT: 1.6 M');
+      cy.get('#pokemon-weight').contains('WEIGHT: 85.5 KG');
+
+      cy.get('#next-btn').click();
+
+      cy.contains('Raichu').click();
+
+      cy.get('#pokemon-img').should('be.visible');
+      cy.get('#pokemon-name').contains('RAICHU');
+      cy.get('#pokemon-order').contains('ORDER: 51');
+      cy.get('#pokemon-type').contains('TYPE: ELECTRIC');
+      cy.get('#pokemon-height').contains('HEIGHT: 0.8 M');
+      cy.get('#pokemon-weight').contains('WEIGHT: 30 KG');
+    });
+  });
+
 });
 
