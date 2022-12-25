@@ -45,5 +45,34 @@ context('Pokedex', () => {
   });
 
 
+
+  describe('Test navegation buttons', () => {
+
+    it('previous button should be red in first pokemon page', () => {
+      cy.get('#previous-btn')
+        .should('have.attr', 'class')
+        .and('contain', 'nes-btn is-error');
+    });
+
+    it('pokemon page should change when clicking a nav button', () => {
+
+      cy.contains('Charmander').should("be.visible");
+
+      cy.get('#next-btn').click();
+
+      cy.contains('Pikachu').should("be.visible");
+
+      cy.get('#previous-btn').click();
+
+      cy.contains('Charmander').should("be.visible");
+    });
+
+    it('previous button should be white after first pokemon page', () => {
+      cy.get('#previous-btn')
+        .should('have.attr', 'class')
+        .and('contain', 'nes-btn');
+    });
+
+  });
 });
 
