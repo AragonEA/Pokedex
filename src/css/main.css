@@ -15,6 +15,11 @@ body {
   width: fit-content;
 }
 
+#pokemon-grid :hover {
+background-color: grey;
+border-radius: 10px;
+}
+
 #logo {
   display: block;
   margin-left: auto;
