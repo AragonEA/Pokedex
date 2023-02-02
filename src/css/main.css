@@ -8,11 +8,16 @@ body {
   min-width: 300px;
 }
 
-#pokemon-list,
+#pokemon-grid,
 #pokemon-data,
 #nav-bar {
   margin: 0 auto;
   width: fit-content;
+}
+
+#pokemon-grid :hover {
+background-color: grey;
+border-radius: 10px;
 }
 
 #logo {
@@ -42,7 +47,7 @@ a {
 @media only screen and (min-width: 560px) {
   /* For tablets: */
 
-  #pokemon-list {
+  #pokemon-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
@@ -51,13 +56,13 @@ a {
 @media only screen and (min-width: 400px) and (max-width: 560px) {
   /* For mobile phones: */
 
-  #pokemon-list {
+  #pokemon-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media only screen and (min-width: 1050px) {
+@media only screen and (min-width: 1100px) {
   /* For desktop: */
 
   body {
@@ -74,7 +79,7 @@ a {
     height: 250px;
   }
 
-  #pokemon-list {
+  #pokemon-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, 1fr);
