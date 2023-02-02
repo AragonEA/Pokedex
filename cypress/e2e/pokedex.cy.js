@@ -1,4 +1,4 @@
-const URL = 'http://127.0.0.1:8080'
+const URL = 'http://127.0.0.1:5500/Pokedex/'
 
 context('Pokedex', () => {
 
@@ -14,7 +14,7 @@ context('Pokedex', () => {
     });
 
     it('pokemons grid should have pokemons', () => {
-      cy.get('#pokemon-list').find('.list-item').should('have.length', TOTAL_POKEMONS);
+      cy.get('#pokemon-grid').find('.grid-item').should('have.length', TOTAL_POKEMONS);
     });
 
     it('pokemon data panel should show data of the first pokemon in grid', () => {
