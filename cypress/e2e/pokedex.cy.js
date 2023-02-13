@@ -7,14 +7,14 @@ context('Pokedex', () => {
   });
 
   describe('Load pokedex elements', () => {
-    const TOTAL_POKEMONS = 16
+    const TOTAL_POKEMONS_IN_GRID = 16
 
     it('logo in header should be visible', () => {
       cy.get('#logo').should('be.visible');
     });
 
     it('pokemons grid should have pokemons', () => {
-      cy.get('#pokemon-grid').find('.grid-item').should('have.length', TOTAL_POKEMONS);
+      cy.get('#pokemon-grid').find('.grid-item').should('have.length', TOTAL_POKEMONS_IN_GRID);
     });
 
     it('pokemon data panel should show data of the first pokemon in grid', () => {
