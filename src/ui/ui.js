@@ -1,11 +1,11 @@
-import { getPokemons, getPokemonData } from './pokeapi.js';
+import { getPokemons, getPokemonData } from '../api/pokeapi.js';
 
 let previousPage = '';
 let nextPage = '';
 const $pokemonGrid = document.querySelector('#pokemon-grid');
 const $pokemonName = document.querySelector('#pokemon-name');
 const $pokemonImg = document.querySelector('#pokemon-img');
-const $pokemonOrder = document.querySelector('#pokemon-order');
+const $pokemonID = document.querySelector('#pokemon-id');
 const $pokemonType = document.querySelector('#pokemon-type');
 const $pokemonHeight = document.querySelector('#pokemon-height');
 const $pokemonWeight = document.querySelector('#pokemon-weight');
@@ -32,9 +32,9 @@ export function createPokemonGrid(pokemons) {
         const $pokemonContainer = document.createElement('div');
         const pokemonNumber = pokemons[pokemon].url.slice(30).match(/(\d+)/g);
 
-        $pokemonContainer.classList = 'grid-item';
-        $pokemonImg.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonNumber}.png`;
-        $pokemonName.textContent = capitalize((pokemons[pokemon].name));
+        $pokemonContainer.classList = 'grid-item nes-pointer';
+        $pokemonName.classList = 'grid-item nes-pointer';
+
 
         $pokemonGrid.appendChild($pokemonContainer);
         $pokemonContainer.appendChild($pokemonImg);
@@ -46,23 +46,31 @@ export function showPokemonData(pokemonData) {
 
     $pokemonImg.src = pokemonData.sprites["front_default"];
     $pokemonName.textContent = (`${pokemonData.name}`).toUpperCase();
-    $pokemonOrder.textContent = (`ORDER: ${pokemonData.order}`)
+    $pokemonID.textContent = (`ID: ${pokemonData.id}`)
     $pokemonType.textContent = (`TYPE: ${pokemonData.types[0].type.name}`).toUpperCase();
     $pokemonHeight.textContent = (`HEIGHT: ${pokemonData.height / 10} M`).toUpperCase();
     $pokemonWeight.textContent = (`WEIGHT: ${pokemonData.weight / 10} KG`).toUpperCase();
 }
 
-$pokemonGrid.addEventListener('click', async (event) => {
-    const $element = event.target.parentNode;
+$pokemonGrid.addEventListener('click', (event) => {
+    const $element = event.target;
+    
     if ($element.classList.contains('grid-item')) {
-        const pokemonName = uncapitalize($element.childNodes[1].innerText);
-        $element.addEventListener('click', showPokemonData(await getPokemonData(pokemonName)));
+        setNewPokemonData($element);
+    } else if($element.tagName === "IMG"){
+        setNewPokemonData($element.nextSibling);
     }
 });
+
+async function setNewPokemonData($element){
+    const pokemonName = uncapitalize($element.innerText);
+    $element.addEventListener('click', showPokemonData(await getPokemonData(pokemonName)));
+}
 
 async function showPreviousPage() {
     if (previousPage) {
         $previousBtn.classList.remove('is-error');
+        $nextBtn.classList.remove('is-error');
         setNewPokemonGrid(await getPokemons(previousPage));
     } else {
         $previousBtn.classList.add('is-error');
@@ -71,7 +79,6 @@ async function showPreviousPage() {
 
 async function showNextPage() {
     if (nextPage) {
-        $nextBtn.classList.remove('is-error');
         $previousBtn.classList.remove('is-error');
         setNewPokemonGrid(await getPokemons(nextPage));
     } else {
