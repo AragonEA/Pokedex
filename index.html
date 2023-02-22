@@ -36,8 +36,16 @@
 
 
                 </div>
-                <div id="nav-bar" class="">
+                <div id="nav-bar">
                     <button id="previous-btn" type="button" class="nes-btn is-error">Previous</button>
+                    <div class="nes-select">
+                        <form onsubmit="return false" id="selector-form">
+                        <select id="page-selector" name="selector">
+                        </select>
+                        <input id="select-btn" class="nes-btn" type="submit" value="Select Page">
+                    </form>  
+                    </div>
+
                     <button id="next-btn" type="button" class="nes-btn">Next</button>
                 </div>
         </div>

@@ -49,6 +49,10 @@ a {
   margin-top: 10px;
 }
 
+#nav-bar{
+  display: grid;
+}
+
 @media only screen and (min-width: 560px) {
   /* For tablets: */
 
@@ -114,6 +118,10 @@ a {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+  }
+
+  #nav-bar{
+    display: flex;
   }
 
   footer {

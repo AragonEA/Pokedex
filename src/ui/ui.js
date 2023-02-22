@@ -35,6 +35,8 @@ export function createPokemonGrid(pokemons) {
         $pokemonContainer.classList = 'grid-item nes-pointer';
         $pokemonName.classList = 'grid-item nes-pointer';
 
+        $pokemonImg.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonNumber}.png`;
+        $pokemonName.textContent = capitalize((pokemons[pokemon].name));
 
         $pokemonGrid.appendChild($pokemonContainer);
         $pokemonContainer.appendChild($pokemonImg);
