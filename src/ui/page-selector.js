@@ -18,7 +18,6 @@ export function loadPageSelector(pokemons){
  
 }
 
-
 }
 
 function createSelectorElement(pageNumber){
@@ -29,7 +28,6 @@ function createSelectorElement(pageNumber){
 
 }
 
-
 function handleEvent(event) {
   const pageSelected = $form[`selector`].value;
   const limit = 16;
@@ -38,7 +36,6 @@ function handleEvent(event) {
   changePage(URL)
   event.preventDefault();
 }
-
 
 async function changePage(URL){
   const pokemons = await getPokemons(URL);
