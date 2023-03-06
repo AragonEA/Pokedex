@@ -1,6 +1,6 @@
-import { getPokemons, getPokemonData } from '../api/pokeapi.js';
-import { setNewPokemonGrid, showPokemonData } from '../ui/ui.js';
-import { loadPageSelector } from '../ui/page-selector.js'
+import { getPokemons, getPokemonData } from './api/pokeapi.js';
+import { setNewPokemonGrid, showPokemonData } from './ui/ui.js';
+import { loadPageSelector } from './ui/page-selector.js'
 
 const URL = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=16';
 
