@@ -1,14 +1,12 @@
-export function getPokemons(URL) {
-    const newURL = removeLimit(URL)
-    return fetch(newURL + 'limit=16').then(response => response.json());
+const POKEMONS_LIMIT = 16;
+
+
+export function getPokemons(offset = 0, limit = POKEMONS_LIMIT) {
+    const URL = `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`;
+    return fetch(URL).then(response => response.json());
 }
 
 export function getPokemonData(pokemonName) {
     return fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}/`)
         .then((response) => response.json());
-}
-
-function removeLimit(URL){
-    let lastIndex = URL.lastIndexOf("limit")
-    return URL = URL.substring(0, lastIndex);
 }
