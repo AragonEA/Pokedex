@@ -1,4 +1,6 @@
 import { getPokemons, getPokemonData } from '../api/pokeapi.js';
+import { getOffset } from '../utilities/utilities.js';
+import { updatePageSelectorValue } from './page-selector.js';
 
 let previousPage = '';
 let nextPage = '';
@@ -22,6 +24,7 @@ export function setNewPokemonGrid(response) {
 
     deletePokemonsInGrid();
     createPokemonGrid(response.results)
+    updatePageSelectorValue(response.previous);
 }
 
 export function createPokemonGrid(pokemons) {
@@ -56,7 +59,7 @@ export function showPokemonData(pokemonData) {
 
 $pokemonGrid.addEventListener('click', (event) => {
     const $element = event.target;
-    
+
     if ($element.classList.contains('grid-item')) {
         setNewPokemonData($element);
     } else if($element.tagName === "IMG"){
@@ -64,7 +67,7 @@ $pokemonGrid.addEventListener('click', (event) => {
     }
 });
 
-async function setNewPokemonData($element){
+async function setNewPokemonData($element) {
     const pokemonName = uncapitalize($element.innerText);
     $element.addEventListener('click', showPokemonData(await getPokemonData(pokemonName)));
 }
@@ -73,7 +76,7 @@ async function showPreviousPage() {
     if (previousPage) {
         $previousBtn.classList.remove('is-error');
         $nextBtn.classList.remove('is-error');
-        setNewPokemonGrid(await getPokemons(previousPage));
+        setNewPokemonGrid(await getPokemons(getOffset(previousPage)));
     } else {
         $previousBtn.classList.add('is-error');
     }
@@ -82,7 +85,7 @@ async function showPreviousPage() {
 async function showNextPage() {
     if (nextPage) {
         $previousBtn.classList.remove('is-error');
-        setNewPokemonGrid(await getPokemons(nextPage));
+        setNewPokemonGrid(await getPokemons(getOffset(nextPage)));
     } else {
         $nextBtn.classList.add('is-error');
     }

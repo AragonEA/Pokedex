@@ -36,6 +36,15 @@ function handleEvent(event) {
   event.preventDefault();
 }
 
+export function updatePageSelectorValue(page) {
+  const limit = 16;
+  const newValue = (getOffset(page) / limit) + 2;
+  $pageSelector.value = newValue;
+
+}
+
+async function changePage(offset, limit) {
+  const pokemons = await getPokemons(offset, limit);
   setNewPokemonGrid(pokemons)
 }
 
