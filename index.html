@@ -8,19 +8,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pokedex</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P">
-    <link rel="stylesheet" href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" />
+    <link rel="stylesheet" href="./node_modules/nes.css/css/nes.css" />
     <link rel="stylesheet" href="src/css/main.css">
 </head>
 
 <body>
     <header>
-        <img id="logo" src="src/ui/img/pokemon-logo.png" alt="pokemon-logo">
+        <img id="logo" src="src/ui/img/pokemon-logo.png" alt="pokedex logo">
     </header>
     <main>
-<div class="container">
-        <div class="left">
+        <div class="container">
+            <section class="left">
                 <div id="pokemon-data" class="nes-container is-centered background-white border-radius">
-                    <img id="pokemon-img" class="img" alt="pokemon-image">
+                    <picture>
+                        <img id="pokemon-img" class="img" alt="pokemon-image">
+                    </picture>
                     <p id="pokemon-name" class="title">NAME</p>
                     <ul class="nes-list is-disc" id="pokemon-stats">
                         <li id="pokemon-id">ID: </li>
@@ -29,33 +31,31 @@
                         <li id="pokemon-weight">WEIGHT: </li>
                     </ul>
                 </div>
-        </div>
+            </section>
 
-        <div class="right">
+            <section class="right">
                 <div id="pokemon-grid" class="nes-container is-centered background-white border-radius">
 
-
                 </div>
-                <div id="nav-bar">
+                <nav id="nav-bar">
                     <button id="previous-btn" type="button" class="nes-btn is-error">Previous</button>
                     <div class="nes-select">
                         <form onsubmit="return false" id="selector-form">
-                        <select id="page-selector" name="selector">
-                        </select>
-                        <input id="select-btn" class="nes-btn" type="submit" value="Select Page">
-                    </form>  
+                            <select id="page-selector" name="selector">
+                            </select>
+                            <input id="select-btn" class="nes-btn" type="submit" value="Select Page">
+                        </form>
                     </div>
 
                     <button id="next-btn" type="button" class="nes-btn">Next</button>
-                </div>
-        </div>
+                </nav>
+            </section>
 
-</div>
+        </div>
     </main>
     <footer>
         <a href="https://github.com/AragonEA">AragonEA<i class="nes-icon github is-small"></i></a>
     </footer>
-
     <script src="src/main.js" type="module"></script>
 </body>
 
