@@ -24,6 +24,25 @@ export async function getPokemon(pokemonName) {
     return pokemon;
   }
 }
+
+export async function getPokemons(offset = 0, limit = POKEMONS_LIMIT) {
+
+  try {
+    const pokemons = JSON.parse(localStorage.getItem(getPokemonsKey(offset, limit)));
+    if (pokemons === null) {
+      throw new Error(`Pokemons list with offset ${offset} and limit ${limit} not found`);
+    } else {
+      return pokemons;
+    }
+  } catch (e) {
+    const pokemons = await getPokemonsFromApi(offset, limit);
+    savePokemons(offset, limit, pokemons);
+    return pokemons;
+  }
+}
+
+
+
 export function savePokemon(pokemonName, pokemon) {
 
   if (pokemonName === undefined || typeof pokemon !== 'object') {
@@ -44,3 +63,6 @@ function getPokemonKey(pokemonName) {
   return `pokemon_${pokemonName}`;
 }
 
+function getPokemonsKey(offset, limit) {
+  return `pokemons_${offset}_${limit}`;
+}
