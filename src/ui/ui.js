@@ -1,4 +1,4 @@
-import { getPokemons, getPokemonData } from '../api/pokeapi.js';
+import { getPokemons, getPokemon } from '../storage/pokemon.js';
 import { getOffset } from '../utilities/utilities.js';
 import { updatePageSelectorValue } from './page-selector.js';
 
@@ -47,29 +47,28 @@ export function createPokemonGrid(pokemons) {
     });
 }
 
-export function showPokemonData(pokemonData) {
-
-    $pokemonImg.src = pokemonData.sprites["front_default"];
-    $pokemonName.textContent = (`${pokemonData.name}`).toUpperCase();
-    $pokemonID.textContent = (`ID: ${pokemonData.id}`)
-    $pokemonType.textContent = (`TYPE: ${pokemonData.types[0].type.name}`).toUpperCase();
-    $pokemonHeight.textContent = (`HEIGHT: ${pokemonData.height / 10} M`).toUpperCase();
-    $pokemonWeight.textContent = (`WEIGHT: ${pokemonData.weight / 10} KG`).toUpperCase();
+export function showPokemon(pokemon) {
+    $pokemonName.textContent = (`${pokemon.name}`).toUpperCase();
+    $pokemonID.textContent = (`ID: ${pokemon.id}`)
+    $pokemonImg.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`;
+    $pokemonType.textContent = (`TYPE: ${pokemon.types[0].type.name}`).toUpperCase();
+    $pokemonHeight.textContent = (`HEIGHT: ${pokemon.height / 10} M`).toUpperCase();
+    $pokemonWeight.textContent = (`WEIGHT: ${pokemon.weight / 10} KG`).toUpperCase();
 }
 
 $pokemonGrid.addEventListener('click', (event) => {
     const $element = event.target;
 
     if ($element.classList.contains('grid-item')) {
-        setNewPokemonData($element);
+        setNewPokemon($element);
     } else if($element.tagName === "IMG"){
-        setNewPokemonData($element.nextSibling);
+        setNewPokemon($element.nextSibling);
     }
 });
 
-async function setNewPokemonData($element) {
+async function setNewPokemon($element) {
     const pokemonName = uncapitalize($element.innerText);
-    $element.addEventListener('click', showPokemonData(await getPokemonData(pokemonName)));
+    $element.addEventListener('click', showPokemon(await getPokemon(pokemonName)));
 }
 
 async function showPreviousPage() {

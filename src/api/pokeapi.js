@@ -6,7 +6,7 @@ export function getPokemons(offset = 0, limit = POKEMONS_LIMIT) {
     return fetch(URL).then(response => response.json());
 }
 
-export function getPokemonData(pokemonName) {
+export function getPokemon(pokemonName) {
     return fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}/`)
         .then((response) => response.json());
 }
