@@ -1,3 +1,9 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 html,
 body {
   font-family: "Press Start 2P";
@@ -13,6 +19,10 @@ body {
 #nav-bar {
   margin: 0 auto;
   width: fit-content;
+}
+
+.grid-item{
+  overflow: auto;
 }
 
 #pokemon-grid :hover {
@@ -59,6 +69,12 @@ a {
   #pokemon-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    width: fit-content;
+  }
+
+  #pokemon-img {
+    width: 300px;
+    height: 300px;
   }
 
   #pokemon-img{
@@ -71,7 +87,13 @@ a {
 @media only screen and (min-width: 0px) and (max-width: 560px) {
   /* For mobile phones: */
 
-  #pokemon-img{
+  #pokemon-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    width: fit-content;
+  }
+
+  #pokemon-img {
     width: 200px;
     height: 200px;
   }
@@ -95,7 +117,8 @@ a {
   }
 
   #pokemon-img {
-    height: 250px;
+    width: 300px;
+    height: 300px;
   }
 
   .grid-item {
@@ -108,7 +131,6 @@ a {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     width: min-content;
-    
     grid-column-gap: 20px;
     grid-row-gap: 0px;
     min-width: 600px;
@@ -125,11 +147,10 @@ a {
   }
 
   .container{
-  
+    height: 100%;
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 2fr;
-    height: 100vh;
   }
 
 

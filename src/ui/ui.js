@@ -47,6 +47,7 @@ export function createPokemonGrid(pokemons) {
     });
 }
 
+
 export function showPokemon(pokemon) {
     $pokemonName.textContent = (`${pokemon.name}`).toUpperCase();
     $pokemonID.textContent = (`ID: ${pokemon.id}`)
@@ -58,13 +59,13 @@ export function showPokemon(pokemon) {
 
 $pokemonGrid.addEventListener('click', (event) => {
     const $element = event.target;
-
     if ($element.classList.contains('grid-item')) {
         setNewPokemon($element);
     } else if($element.tagName === "IMG"){
         setNewPokemon($element.nextSibling);
     }
 });
+
 
 async function setNewPokemon($element) {
     const pokemonName = uncapitalize($element.innerText);
