@@ -7,6 +7,17 @@ context('Pokedex', { testIsolation: false }, () => {
   before(() => {
 
     cy.visit(URL);
+    
+    cy.intercept('GET', 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=16', { fixture: 'pokemons-list-page-1.json' })
+      .as('getFirstPage');
+    cy.intercept('GET', 'https://pokeapi.co/api/v2/pokemon/?offset=16&limit=16', { fixture: 'pokemons-list-page-2.json' })
+      .as('getSecondPage');
+    cy.intercept('GET', 'https://pokeapi.co/api/v2/pokemon/bulbasaur/', { fixture: 'bulbasaur.json' })
+      .as('getBulbasaur');
+    cy.intercept('GET', 'https://pokeapi.co/api/v2/pokemon/blastoise/', { fixture: 'blastoise.json' })
+      .as('getBlastoise');
+    cy.intercept('GET', 'https://pokeapi.co/api/v2/pokemon/raichu/', { fixture: 'raichu.json' })
+      .as('getRaichu');
   });
 
   describe('Load fist page', () => {
