@@ -17,6 +17,8 @@ const $nextBtn = document.querySelector('#next-btn');
 $previousBtn.addEventListener('click', showPreviousPage);
 $nextBtn.addEventListener('click', showNextPage);
 
+$pokemonImg.setAttribute('onerror',"javascript:this.src='src/ui/img/pokemonNotFound.png'")
+
 export function setNewPokemonGrid(response) {
 
     previousPage = response.previous;
@@ -30,19 +32,20 @@ export function setNewPokemonGrid(response) {
 export function createPokemonGrid(pokemons) {
 
     Object.keys(pokemons).forEach(pokemon => {
-        const $pokemonImg = document.createElement('img');
+        const $pokemonIcon = document.createElement('img');
         const $pokemonName = document.createElement('p');
         const $pokemonContainer = document.createElement('div');
-        const pokemonNumber = pokemons[pokemon].url.slice(30).match(/(\d+)/g);
+        const pokemonID = pokemons[pokemon].url.slice(30).match(/(\d+)/g);
 
         $pokemonContainer.classList = 'grid-item nes-pointer';
         $pokemonName.classList = 'grid-item nes-pointer';
-
-        $pokemonImg.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonNumber}.png`;
+        $pokemonIcon.classList = 'pokemon-icon'
+        $pokemonIcon.setAttribute('onerror',"javascript:this.src='src/ui/img/pokemonNotFound.png'")
+        $pokemonIcon.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonID}.png`;
         $pokemonName.textContent = capitalize((pokemons[pokemon].name));
 
         $pokemonGrid.appendChild($pokemonContainer);
-        $pokemonContainer.appendChild($pokemonImg);
+        $pokemonContainer.appendChild($pokemonIcon);
         $pokemonContainer.appendChild($pokemonName);
     });
 }
@@ -58,6 +61,7 @@ function getPokemonTypes(pokemon){
 export function showPokemon(pokemon) {
     $pokemonName.textContent = (`${pokemon.name}`).toUpperCase();
     $pokemonID.textContent = (`ID: ${pokemon.id}`)
+    $pokemonImg.setAttribute(onerror,"this.src='./img/pokemonNotFound.png'" ) 
     $pokemonImg.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`;
     $pokemonType.textContent = 'TYPE: ' + getPokemonTypes(pokemon.types);
     $pokemonHeight.textContent = (`HEIGHT: ${pokemon.height / 10} M`).toUpperCase();
