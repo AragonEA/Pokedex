@@ -47,12 +47,19 @@ export function createPokemonGrid(pokemons) {
     });
 }
 
+function getPokemonTypes(pokemon){
+    let types = ''
+    pokemon.forEach(pokemonTypes => {
+        types += `${pokemonTypes.type.name}` + ' '
+    })
+    return types.toUpperCase();
+}
 
 export function showPokemon(pokemon) {
     $pokemonName.textContent = (`${pokemon.name}`).toUpperCase();
     $pokemonID.textContent = (`ID: ${pokemon.id}`)
     $pokemonImg.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`;
-    $pokemonType.textContent = (`TYPE: ${pokemon.types[0].type.name}`).toUpperCase();
+    $pokemonType.textContent = 'TYPE: ' + getPokemonTypes(pokemon.types);
     $pokemonHeight.textContent = (`HEIGHT: ${pokemon.height / 10} M`).toUpperCase();
     $pokemonWeight.textContent = (`WEIGHT: ${pokemon.weight / 10} KG`).toUpperCase();
 }
