@@ -48,22 +48,22 @@ export function savePokemon(pokemonName, pokemon) {
   if (pokemonName === undefined || typeof pokemon !== 'object') {
     throw new Error('A pokemon name and a pokemon is required to save to localStorage');
   }
-  try{
+  try {
     localStorage.setItem(getPokemonKey(pokemonName), JSON.stringify(pokemon));
-  }catch(e){
+  } catch (e) {
     console.error(e);
   }
-  }
-  
+}
+
 
 export function savePokemons(offset, limit, pokemons) {
   if (offset === undefined || limit === undefined) {
     throw new Error('Offset, limit and pokemons are required');
   }
-  try{
-  localStorage.setItem(getPokemonsKey(offset, limit), JSON.stringify(pokemons));
-  }catch(e){
-  onsole.error(e);
+  try {
+    localStorage.setItem(getPokemonsKey(offset, limit), JSON.stringify(pokemons));
+  } catch (e) {
+    console.error(e);
   }
 }
 
