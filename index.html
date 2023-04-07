@@ -18,6 +18,7 @@
     </header>
     <main>
         <div class="container">
+
             <section class="left">
                 <div id="pokemon-data" class="nes-container is-centered background-white border-radius">
                     <picture>
@@ -30,12 +31,35 @@
                         <li id="pokemon-height">HEIGHT: </li>
                         <li id="pokemon-weight">WEIGHT: </li>
                     </ul>
+                    <div>
+                        <button id="modalBtn" class="nes-btn">Show Abilities & Movements</button>
+                        <div class="modal">
+                            <div class="modal-content">
+                                <div class="modal-title">
+                                    <span class="close">&times;</span>
+                                    <h2>Abilities</h2>
+                                </div>
+                                <div id="abilities-section" class="modal-data">
+                                    <ul id="abilities">
+                                        <li>Loading...</li>
+                                    </ul>
+                                </div>
+                                <div class="modal-title">
+                                    <h2>Movements</h2>
+                                </div>
+                                <div id="movements-section" class="modal-data">
+                                    <ul id="movements">
+                                        <li>Loading...</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <section class="right">
                 <div id="pokemon-grid" class="nes-container is-centered background-white border-radius">
-
                 </div>
                 <nav id="nav-bar">
                     <button id="previous-btn" type="button" class="nes-btn is-error">Previous</button>
@@ -46,7 +70,6 @@
                             <input id="select-btn" class="nes-btn" type="submit" value="Select Page">
                         </form>
                     </div>
-
                     <button id="next-btn" type="button" class="nes-btn">Next</button>
                 </nav>
             </section>
