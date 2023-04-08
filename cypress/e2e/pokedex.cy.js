@@ -1,52 +1,48 @@
-const URL = 'http://127.0.0.1:5500/Pokedex/'
+/// <reference types="cypress"/>
 
-context('Pokedex', () => {
+const URL = ' http://127.0.0.1:8080'
+
+context('Pokedex', { testIsolation: false }, () => {
 
   before(() => {
+
     cy.visit(URL);
+    
+    cy.intercept('GET', 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=16', { fixture: 'pokemons-list-page-1.json' })
+      .as('getFirstPage');
+    cy.intercept('GET', 'https://pokeapi.co/api/v2/pokemon/?offset=16&limit=16', { fixture: 'pokemons-list-page-2.json' })
+      .as('getSecondPage');
+    cy.intercept('GET', 'https://pokeapi.co/api/v2/pokemon/bulbasaur/', { fixture: 'bulbasaur.json' })
+      .as('getBulbasaur');
+    cy.intercept('GET', 'https://pokeapi.co/api/v2/pokemon/blastoise/', { fixture: 'blastoise.json' })
+      .as('getBlastoise');
+    cy.intercept('GET', 'https://pokeapi.co/api/v2/pokemon/raichu/', { fixture: 'raichu.json' })
+      .as('getRaichu');
   });
 
-  describe('Load pokedex elements', () => {
+  describe('Load fist page', () => {
+
     const TOTAL_POKEMONS_IN_GRID = 16
+    const TOTAL_POKEMON_NAMES_IN_GRID = 16
 
-    it('logo in header should be visible', () => {
-      cy.get('#logo').should('be.visible');
+    it('pokemons grid should have 16 pokemons', () => {
+      cy.get('#pokemon-grid').find('.grid-item').should('have.length', TOTAL_POKEMONS_IN_GRID + TOTAL_POKEMON_NAMES_IN_GRID);
     });
+  });
 
-    it('pokemons grid should have pokemons', () => {
-      cy.get('#pokemon-grid').find('.grid-item').should('have.length', TOTAL_POKEMONS_IN_GRID);
-    });
+  describe('Load fist pokemon data', () => {
 
-    it('pokemon data panel should show data of the first pokemon in grid', () => {
+    it('pokemon data panel should show the data of the first pokemon in the grid', () => {
       cy.get('#pokemon-img').should('be.visible');
       cy.get('#pokemon-name').contains('BULBASAUR');
-      cy.get('#pokemon-order').contains('ORDER: 1');
+      cy.get('#pokemon-id').contains('ID: 1');
       cy.get('#pokemon-type').contains('TYPE: GRASS');
       cy.get('#pokemon-height').contains('HEIGHT: 0.7 M');
       cy.get('#pokemon-weight').contains('WEIGHT: 6.9 KG');
     });
-
-    it('nav-bar button should be visible', () => {
-      cy.get('#nav-bar').should('be.visible');
-      cy.get('#previous-btn').should('be.visible');
-      cy.get('#next-btn').should('be.visible');
-    });
-
-    it('previous button should be red', () => {
-      cy.get('#previous-btn')
-        .should('have.attr', 'class')
-        .and('contain', 'nes-btn is-error');
-    });
-
-    it('footer should be visible', () => {
-      cy.get('footer').should('be.visible');
-    });
-
   });
 
-
-
-  describe('Test navegation buttons', () => {
+  describe('Test navegation', () => {
 
     it('previous button should be red in first pokemon page', () => {
       cy.get('#previous-btn')
@@ -56,13 +52,17 @@ context('Pokedex', () => {
 
     it('pokemon page should change when clicking a nav button', () => {
 
-      cy.contains('Charmander').should("be.visible");
+      cy.get('#page-selector').contains('1');
 
+      cy.contains('Charmander').should("be.visible");
       cy.get('#next-btn').click();
 
-      cy.contains('Pikachu').should("be.visible");
+      cy.get('#page-selector').contains('2');
 
+      cy.contains('Pikachu').should("be.visible");
       cy.get('#previous-btn').click();
+
+      cy.get('#page-selector').contains('1');
 
       cy.contains('Charmander').should("be.visible");
     });
@@ -75,26 +75,29 @@ context('Pokedex', () => {
 
   });
 
-  describe('pokemon data should load when a pokemon is clicked', () => {
+  describe('Pokemon data should load when a pokemon is clicked', () => {
 
-    it('show data when a pokemon is clicked', () => {
+    it('should show data when a pokemon is clicked in the fist page', () => {
 
       cy.contains('Blastoise').click();
 
       cy.get('#pokemon-img').should('be.visible');
       cy.get('#pokemon-name').contains('BLASTOISE');
-      cy.get('#pokemon-order').contains('ORDER: 12');
+      cy.get('#pokemon-id').contains('ID: 9');
       cy.get('#pokemon-type').contains('TYPE: WATER');
       cy.get('#pokemon-height').contains('HEIGHT: 1.6 M');
       cy.get('#pokemon-weight').contains('WEIGHT: 85.5 KG');
+    });
 
+    it('should show data when a pokemon is clicked in the second page', () => {
+   
       cy.get('#next-btn').click();
 
       cy.contains('Raichu').click();
 
       cy.get('#pokemon-img').should('be.visible');
       cy.get('#pokemon-name').contains('RAICHU');
-      cy.get('#pokemon-order').contains('ORDER: 51');
+      cy.get('#pokemon-id').contains('ID: 26');
       cy.get('#pokemon-type').contains('TYPE: ELECTRIC');
       cy.get('#pokemon-height').contains('HEIGHT: 0.8 M');
       cy.get('#pokemon-weight').contains('WEIGHT: 30 KG');

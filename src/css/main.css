@@ -1,4 +1,8 @@
-*{
+:root {
+  --primary-red: #c12026;
+}
+
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -10,31 +14,29 @@ body {
 }
 
 body {
-  background: url("../ui/img/pokemon-background.jpg") center;
-  min-width: 300px;
+  background: no-repeat url("../ui/img/pokemon-background.jpg");
 }
 
-#pokemon-grid,
-#pokemon-data,
-#nav-bar {
-  margin: 0 auto;
-  width: fit-content;
+p {
+  margin: 0;
 }
 
-.grid-item{
-  overflow: auto;
+a {
+  margin: 0;
+  color: black;
 }
 
-#pokemon-grid :hover {
-background-color: #c12026;
-border-radius: 9px;
+footer {
+  margin-left: 1vw;
 }
 
-#logo {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  height: 15vh;
+.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr;
+  gap: 5vw;
+  min-height: 59vh;
+  margin: 0 1vw 0 1vw;
 }
 
 .background-white {
@@ -49,128 +51,254 @@ border-radius: 9px;
   border-radius: 10px;
 }
 
-a {
-  margin: 0;
-  color: black;
+/*      Header       */
+
+#logo {
+  display: flex;
+  margin: 0 auto;
+  height: 100px;
+  width: 200px;
+}
+/*                   */
+
+/*      Pokemon-Grid      */
+
+#pokemon-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  min-height: 100%;
 }
 
-#select-btn{
-  width: 98%;
+.grid-item {
+  height: 0;
+}
+
+.pokemon-icon {
+  width: 96px;
+  height: 96px;
+}
+
+#pokemon-grid :hover {
+  background-color: var(--primary-red);
+  border-radius: 9px;
+}
+
+/*                      */
+
+/* Pokemon-Section */
+#pokemon-img {
+  height: 40vh;
+  width: 100%;
+  min-width: 200px;
+  min-height: 200px;
+  max-width: 400px;
+  max-height: 400px;
+  border-radius: 9px;
+}
+
+#pokemon-data {
+  min-width: 35vw;
+  min-height: 59vh;
+}
+/*                 */
+
+/*      Page-Selector       */
+
+#select-btn {
   margin-top: 10px;
 }
 
-#nav-bar{
-  display: grid;
+#nav-bar {
+  display: flex;
+  margin-top: 5px;
 }
 
-@media only screen and (min-width: 560px) {
-  /* For tablets: */
+#selector-form {
+  display: flex;
+  flex-direction: column;
+}
+
+/*                         */
+
+/*        Modal        */
+
+#movements {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+#movements>li {
+  width: 20%;
+}
+
+#abilities {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  -webkit-animation-name: fadeIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: fadeIn;
+  animation-duration: 0.4s
+}
+
+.modal-content {
+  position: fixed;
+  bottom: 0;
+  background-color: #fefefe;
+  width: 100%;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slideIn;
+  animation-duration: 0.4s;
+  max-height: calc(100vh - 210px);
+  overflow-y: auto;
+}
+
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-title {
+  padding: 2px 16px;
+  background-color: var(--primary-red);
+  color: white;
+}
+
+.modal-data {
+  padding: 2px 16px;
+}
+
+@-webkit-keyframes slideIn {
+  from {
+    bottom: -300px;
+    opacity: 0
+  }
+
+  to {
+    bottom: 0;
+    opacity: 1
+  }
+}
+
+@keyframes slideIn {
+  from {
+    bottom: -300px;
+    opacity: 0
+  }
+
+  to {
+    bottom: 0;
+    opacity: 1
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0
+  }
+
+  to {
+    opacity: 1
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0
+  }
+
+  to {
+    opacity: 1
+  }
+}
+
+/*                          */
+
+/*      Media Queries      */
+
+@media only screen and (min-width: 1050px) and (max-width: 1500px) {
+  /* For small screens */
 
   #pokemon-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    width: fit-content;
-  }
-
-  #pokemon-img {
-    width: 300px;
-    height: 300px;
-  }
-
-  #pokemon-img{
-    width: 300px;
-    height: 300px;
-  }
-
-}
-
-@media only screen and (min-width: 0px) and (max-width: 560px) {
-  /* For mobile phones: */
-
-  #pokemon-grid {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    width: fit-content;
-  }
-
-  #pokemon-img {
-    width: 200px;
-    height: 200px;
-  }
-}
-
-@media only screen and (min-width: 1100px) {
-  /* For desktop: */
-
-  body {
-    background-size: 100%;
-  }
-
-  section {
-    box-sizing: border-box;
-  }
-
-  .img {
-    margin-left: auto;
-    margin-right: auto;
-    height: 15vh;
-  }
-
-  #pokemon-img {
-    width: 300px;
-    height: 300px;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 
   .grid-item {
-    width: inherit;
-    margin: auto;
-    min-width: 130px;
+    height: fit-content;
+  }
+
+  #movements{
+    text-align: start;
+  }
+
+  #movements>li {
+    width: 33%;
+  }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 1050px) {
+  /* For mobile phones and tablets */
+
+  .container {
+    display: flex;
+    flex-direction: column;
   }
 
   #pokemon-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    width: min-content;
-    grid-column-gap: 20px;
-    grid-row-gap: 0px;
-    min-width: 600px;
-    min-height: 520px;
-    right: 15px;
+    grid-template-columns: 1fr 1fr;
   }
 
-  .split {
-    height: 100%;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    padding-top: 20px;
+  .grid-item {
+    height: fit-content;
   }
 
-  .container{
-    height: 100%;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
+  #movements>li {
+    width: 50%;
   }
 
+  @media only screen and (min-width: 0px) and (max-width: 500px) {
+    #pokemon-grid {
+      grid-template-columns: 1fr;
+    }
 
-  .centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-  }
+    #movements{
+      justify-content: start;
+    }
 
-  #nav-bar{
-    display: flex;
-  }
+    #movements>li {
+      width: 100%;
+    }
 
-  footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 23px;
+    #nav-bar {
+      flex-direction: column;
+    }
   }
 
 }
+
+/*                           */
+

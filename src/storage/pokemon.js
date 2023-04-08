@@ -14,7 +14,7 @@ export async function getPokemon(pokemonName) {
   try {
     const pokemon = JSON.parse(localStorage.getItem(getPokemonKey(pokemonName)));
     if (pokemon === null) {
-      throw new Error(`Pokemon with ${id} not found`);
+      throw new Error(`Pokemon ${pokemonName} not found`);
     } else {
       return pokemon;
     }
@@ -46,16 +46,25 @@ export async function getPokemons(offset = 0, limit = POKEMONS_LIMIT) {
 export function savePokemon(pokemonName, pokemon) {
 
   if (pokemonName === undefined || typeof pokemon !== 'object') {
-    throw new Error('An ID and a pokemon is required to save to localStorage');
+    throw new Error('A pokemon name and a pokemon is required to save to localStorage');
   }
-  localStorage.setItem(getPokemonKey(pokemonName), JSON.stringify(pokemon));
+  try {
+    localStorage.setItem(getPokemonKey(pokemonName), JSON.stringify(pokemon));
+  } catch (e) {
+    console.error(e);
+  }
 }
+
 
 export function savePokemons(offset, limit, pokemons) {
   if (offset === undefined || limit === undefined) {
     throw new Error('Offset, limit and pokemons are required');
   }
-  localStorage.setItem(getPokemonsKey(offset, limit), JSON.stringify(pokemons));
+  try {
+    localStorage.setItem(getPokemonsKey(offset, limit), JSON.stringify(pokemons));
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 
