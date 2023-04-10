@@ -3,7 +3,7 @@ import { getPokemonName } from '../utilities/utilities.js';
 
 export function setUpModal() {
   const $modal = document.querySelector(".modal");
-  const $btn = document.getElementById("modalBtn");
+  const $btn = document.getElementById("modal-btn");
   const $span = document.getElementsByClassName("close")[0];
 
   $btn.onclick = function () {
