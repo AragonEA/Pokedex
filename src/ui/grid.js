@@ -23,7 +23,7 @@ function createPokemonsInGrid(pokemons) {
         $pokemonContainer.classList = 'grid-item nes-pointer';
         $pokemonName.classList = 'grid-item nes-pointer';
         $pokemonIcon.classList = 'pokemon-icon'
-        $pokemonIcon.setAttribute('onerror', "javascript:this.src='src/ui/img/pokemonNotFound.png'")
+        $pokemonIcon.setAttribute('onerror', "javascript:this.src='src/assets/img/pokemonNotFound.png'")
         $pokemonIcon.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonID}.png`;
         $pokemonName.textContent = capitalize((pokemons[pokemon].name));
 
