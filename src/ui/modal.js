@@ -1,5 +1,4 @@
 import { getPokemon } from '../storage/pokemon.js';
-import { getPokemonName } from '../utilities/utilities.js';
 
 export function setUpModal() {
   const $modal = document.querySelector(".modal");
@@ -67,6 +66,10 @@ function getMovements(movements) {
     $movementsList.appendChild(li)
   });
   return $movementsList;
+}
+
+function getPokemonName() {
+  return document.getElementById('pokemon-name').textContent.toLowerCase();
 }
 
 function deletePreviousAbilities() {
