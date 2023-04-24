@@ -10,20 +10,31 @@ export function getOffset(URL) {
 
 export function getPokemonTypes(pokemon) {
   let types = ''
-  pokemon.forEach(pokemonTypes => {
-    types += `${pokemonTypes.type.name}` + ' '
-  })
+  try {
+    pokemon.forEach(pokemonTypes => {
+      types += `${pokemonTypes.type.name}` + ' '
+    })
+  } catch (e) {
+    types = '';
+  }
   return types.toUpperCase();
 }
 
-export function getPokemonName() {
-  return document.getElementById('pokemon-name').textContent.toLowerCase();
+export function capitalize(string) {
+  try {
+    string = string.charAt(0).toUpperCase() + string.slice(1);
+  } catch (e) {
+    //console.error(e)
+  }
+  return string;
 }
 
 export function uncapitalize(string) {
-  return string.charAt(0).toLowerCase() + string.slice(1);
+  try {
+    string = string.charAt(0).toLowerCase() + string.slice(1);
+  } catch (e) {
+    //console.error(e)
+  }
+  return string;
 }
 
-export function capitalize(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
