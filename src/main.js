@@ -1,4 +1,4 @@
-import { getPokemons, getPokemon } from './api/pokeapi.js';
+import { getPokemons, getPokemon } from './storage/pokemon.js';
 import { showPokemon } from './ui/pokemonSection.js';
 import { setNewPokemonGrid } from './ui/grid.js'
 import { setUpPageSelector } from './ui/pageSelector.js'
