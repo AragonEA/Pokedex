@@ -1,3 +1,5 @@
+import { mapPokemon } from '../mappers/pokemon.js'
+import { mapPokemonList } from '../mappers/pokemonList.js'
 import {
   getPokemons as getPokemonsFromApi,
   getPokemon as getPokemonFromApi
@@ -16,12 +18,12 @@ export async function getPokemon(pokemonName) {
     if (pokemon === null) {
       throw new Error(`Pokemon ${pokemonName} not found`);
     } else {
-      return pokemon;
+      return mapPokemon(pokemon);
     }
   } catch (e) {
     const pokemon = await getPokemonFromApi(pokemonName);
     savePokemon(pokemonName, pokemon);
-    return pokemon;
+    return mapPokemon(pokemon);
   }
 }
 
@@ -32,12 +34,12 @@ export async function getPokemons(offset = 0, limit = POKEMONS_LIMIT) {
     if (pokemons === null) {
       throw new Error(`Pokemons list with offset ${offset} and limit ${limit} not found`);
     } else {
-      return pokemons;
+      return mapPokemonList(pokemons);
     }
   } catch (e) {
     const pokemons = await getPokemonsFromApi(offset, limit);
     savePokemons(offset, limit, pokemons);
-    return pokemons;
+    return mapPokemonList(pokemons);
   }
 }
 
