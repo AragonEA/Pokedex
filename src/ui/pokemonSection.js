@@ -1,4 +1,3 @@
-import { getPokemonTypes, uncapitalize } from '../utilities/utilities.js';
 import { getPokemon } from '../storage/pokemon.js';
 
 const $pokemonName = document.querySelector('#pokemon-name');
