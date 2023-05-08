@@ -1,6 +1,4 @@
-import { updatePageSelectorValue, updatePageVariables } from './pageSelector.js';
 import { setNewPokemon } from './pokemonSection.js';
-import { capitalize } from '../utilities/utilities.js';
 
 const $pokemonGrid = document.querySelector('#pokemon-grid');
 
@@ -8,8 +6,7 @@ export function setNewPokemonGrid(response) {
 
     deletePokemonsInGrid();
     createPokemonsInGrid(response.results)
-    updatePageSelectorValue(response.previous);
-    updatePageVariables(response.previous, response.next);
+    deletePreviousPokemonGrid();
 }
 
 function createPokemonsInGrid(pokemons) {
