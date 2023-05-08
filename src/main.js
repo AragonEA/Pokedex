@@ -5,11 +5,11 @@ import { setUpPageSelector } from './ui/pageSelector.js'
 import { setUpModal } from './ui/modal.js'
 
 async function initialize() {
-    const pokemons = await getPokemons();
-    setNewPokemonGrid(pokemons)
-    showPokemon(await getPokemon('bulbasaur')); //Show data of the first pokemon in the grid
+    const pokemonList = await getPokemons();
+    setNewPokemonGrid(pokemonList)
+    showPokemon(await getPokemon(pokemonList.names[0])); //Show data of the first pokemon in the grid
     setUpModal();
-    setUpPageSelector(pokemons);
+    setUpPageSelector(pokemonList);
 }
 
 initialize();
