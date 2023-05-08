@@ -7,19 +7,22 @@ const $previousBtn = document.querySelector('#previous-btn');
 const $nextBtn = document.querySelector('#next-btn');
 const $pageSelector = document.querySelector('#page-selector');
 const $form = document.querySelector('#selector-form');
+
 let previousPage = '';
 let nextPage = '';
 
-$form.onsubmit = handleEvent;
+$form.onsubmit = handleFormEvent;
 $previousBtn.addEventListener('click', showPreviousPage);
 $nextBtn.addEventListener('click', showNextPage);
 
-function handleEvent(event) {
+function handleFormEvent(event) {
   const pageSelected = $form[`selector`].value;
-  const limit = 16;
-  const offset = (limit * (pageSelected - 1));
-  changePage(offset, limit)
+  const newPage = (POKEMONS_LIMIT * (pageSelected - 1));
+  handlePageChange(newPage);
+
   event.preventDefault();
+}
+
 
 }
 
@@ -36,11 +39,6 @@ function createSelectorElement(pageNumber) {
   $item.value = pageNumber;
   $item.textContent = pageNumber;
   return $item;
-}
-
-async function changePage(offset, limit) {
-  const pokemons = await getPokemons(offset, limit);
-  setNewPokemonGrid(pokemons)
 }
 
 export function updatePageSelectorValue(page) {
