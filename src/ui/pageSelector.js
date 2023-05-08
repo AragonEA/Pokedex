@@ -26,10 +26,16 @@ function handleFormEvent(event) {
 
 }
 
-export function setUpPageSelector(pokemons) {
-  const TOTAL_POKEMONS = pokemons.count;
-  const TOTAL_PAGES = Math.ceil(TOTAL_POKEMONS / POKEMONS_LIMIT) + 1;
-  for (let i = 1; i < TOTAL_PAGES; i++) {
+export function setUpPageSelector(pokemonList) {
+  const {
+    total: POKEMONS,
+    nextUrl: next,
+    previousUrl: previous,
+  } = pokemonList;
+
+  previousPage = previous;
+  nextPage = next;
+
     $pageSelector.appendChild(createSelectorElement(i));
   }
 }
@@ -39,16 +45,6 @@ function createSelectorElement(pageNumber) {
   $item.value = pageNumber;
   $item.textContent = pageNumber;
   return $item;
-}
-
-export function updatePageSelectorValue(page) {
-  const newValue = (getOffset(page) / POKEMONS_LIMIT) + 2;
-  $pageSelector.value = newValue;
-}
-
-export function updatePageVariables(previous, next) {
-  previousPage = previous;
-  nextPage = next;
 }
 
 async function showPreviousPage() {
