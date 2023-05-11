@@ -2,32 +2,31 @@ import { setNewPokemon } from './pokemonSection.js';
 
 const $pokemonGrid = document.querySelector('#pokemon-grid');
 
-export function setNewPokemonGrid(response) {
-
-    deletePokemonsInGrid();
-    createPokemonsInGrid(response.results)
+export function setNewPokemonGrid(pokemonList) {
     deletePreviousPokemonGrid();
+    createPokemonGrid(pokemonList)
 }
 
-function createPokemonsInGrid(pokemons) {
-
-    Object.keys(pokemons).forEach(pokemon => {
-        const $pokemonIcon = document.createElement('img');
-        const $pokemonName = document.createElement('p');
+function createPokemonGrid(pokemonList) {
+    for (let i = 0; i < (pokemonList.ids).length; i++) {
         const $pokemonContainer = document.createElement('div');
-        const pokemonID = pokemons[pokemon].url.slice(30).match(/(\d+)/g);
-
         $pokemonContainer.classList = 'grid-item nes-pointer';
-        $pokemonName.classList = 'grid-item nes-pointer';
-        $pokemonIcon.classList = 'pokemon-icon'
-        $pokemonIcon.setAttribute('onerror', "javascript:this.src='src/assets/img/pokemonNotFound.png'")
-        $pokemonIcon.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonID}.png`;
-        $pokemonName.textContent = capitalize((pokemons[pokemon].name));
-
         $pokemonGrid.appendChild($pokemonContainer);
-        $pokemonContainer.appendChild($pokemonIcon);
-        $pokemonContainer.appendChild($pokemonName);
-    });
+    } 
+}
+
+function createNameElement(pokemonName){
+    const $pokemonName = document.createElement('p');
+    $pokemonName.textContent = (pokemonName);
+    return $pokemonName;
+}
+
+function createIconElement(id, pokemonName){
+    const $pokemonIcon = document.createElement('img');
+    $pokemonIcon.classList = 'pokemon-icon'
+    $pokemonIcon.setAttribute('onerror', "javascript:this.src='src/assets/img/pokemonNotFound.png'")
+    $pokemonIcon.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+    return $pokemonIcon;
 }
 
 $pokemonGrid.addEventListener('click', (event) => {
