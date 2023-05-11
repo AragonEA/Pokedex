@@ -23,49 +23,40 @@ export function setUpModal() {
 
 function showMovementsAndAbilities() {
   const pokemon = getPokemonName();
-
-  showAbilities(pokemon)
-  showMovements(pokemon)
+  showAbilities(pokemon);
+  showMovements(pokemon);
 }
 
 async function showAbilities(pokemonName) {
   const pokemon = await getPokemon(pokemonName)
   deletePreviousAbilities();
-  const abilities = getAbilities(pokemon.abilities);
-  document.querySelector('#abilities-section').appendChild(abilities)
+
+  pokemon.abilities.forEach(ability => {
+    addAbility(ability);
+  });
+  
+}
+
+function addAbility(ability){
+  const $ability = document.createElement('li');
+  $ability.textContent = ability;
+  document.querySelector('#abilities').appendChild($ability)
 }
 
 async function showMovements(pokemonName) {
   const pokemon = await getPokemon(pokemonName)
   deletePreviousMovements();
-  const movements = getMovements(pokemon.moves);
-  document.querySelector('#movements-section').appendChild(movements)
+
+  pokemon.movements.forEach(movement => {
+    addMovements(movement);
+  });
+  
 }
 
-function getAbilities(abilities) {
-  const $abilitiesList = document.querySelector('#abilities')
-  let abilityName = '';
-
-  abilities.forEach((ability) => {
-    abilityName = `${ability.ability.name}`;
-    const li = document.createElement('li');
-    li.textContent = abilityName.toUpperCase();
-    $abilitiesList.appendChild(li)
-  });
-  return $abilitiesList;
-}
-
-function getMovements(movements) {
-  const $movementsList = document.querySelector('#movements')
-  let movementName = '';
-
-  movements.forEach((movement) => {
-    movementName = `${movement.move.name}`;
-    const li = document.createElement('li');
-    li.textContent = movementName.toUpperCase();
-    $movementsList.appendChild(li)
-  });
-  return $movementsList;
+function addMovements(movement){
+  const $movement = document.createElement('li');
+  $movement.textContent = movement;
+  document.querySelector('#movements').appendChild($movement)
 }
 
 function getPokemonName() {
