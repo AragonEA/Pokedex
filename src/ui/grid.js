@@ -10,7 +10,10 @@ export function setNewPokemonGrid(pokemonList) {
 function createPokemonGrid(pokemonList) {
     for (let i = 0; i < (pokemonList.ids).length; i++) {
         const $pokemonContainer = document.createElement('div');
+        $pokemonContainer.dataset.pokemonName = pokemonList.names[i];
         $pokemonContainer.classList = 'grid-item nes-pointer';
+        $pokemonContainer.appendChild(createIconElement(pokemonList.ids[i],pokemonList.names[i]));
+        $pokemonContainer.appendChild(createNameElement(pokemonList.names[i]));
         $pokemonGrid.appendChild($pokemonContainer);
     } 
 }
@@ -23,6 +26,7 @@ function createNameElement(pokemonName){
 
 function createIconElement(id, pokemonName){
     const $pokemonIcon = document.createElement('img');
+    $pokemonIcon.dataset.pokemonName = pokemonName;
     $pokemonIcon.classList = 'pokemon-icon'
     $pokemonIcon.setAttribute('onerror', "javascript:this.src='src/assets/img/pokemonNotFound.png'")
     $pokemonIcon.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
@@ -31,13 +35,13 @@ function createIconElement(id, pokemonName){
 
 $pokemonGrid.addEventListener('click', (event) => {
     const $pokemonSelected = event.target;
-    if ($pokemonSelected.classList.contains('grid-item')) {
-        setNewPokemon($pokemonSelected);
-    } else if ($pokemonSelected.tagName === "IMG") {
-        setNewPokemon($pokemonSelected.nextSibling);
+    if ('pokemonName' in $pokemonSelected.dataset){
+        setNewPokemon($pokemonSelected.dataset['pokemonName'])
+    } else{
+        setNewPokemon($pokemonSelected.textContent)   
     }
 });
 
-function deletePokemonsInGrid() {
+function deletePreviousPokemonGrid() {
     document.querySelectorAll('.grid-item').forEach(item => item.remove());
 }
