@@ -1,5 +1,5 @@
 import { getPokemons } from '../storage/pokemon.js';
-import { setNewPokemonGrid } from './grid.js';
+import { setNewPokemonGrid as changePage } from './grid.js';
 import { getOffset } from '../utilities/utilities.js';
 
 const POKEMONS_LIMIT = 16
@@ -7,26 +7,48 @@ const $previousBtn = document.querySelector('#previous-btn');
 const $nextBtn = document.querySelector('#next-btn');
 const $pageSelector = document.querySelector('#page-selector');
 const $form = document.querySelector('#selector-form');
+
 let previousPage = '';
 let nextPage = '';
 
-$form.onsubmit = handleEvent;
+$form.onsubmit = handleFormEvent;
 $previousBtn.addEventListener('click', showPreviousPage);
 $nextBtn.addEventListener('click', showNextPage);
 
-function handleEvent(event) {
+function handleFormEvent(event) {
   const pageSelected = $form[`selector`].value;
-  const limit = 16;
-  const offset = (limit * (pageSelected - 1));
-  changePage(offset, limit)
-  event.preventDefault();
+  const newPage = (POKEMONS_LIMIT * (pageSelected - 1));
+  handlePageChange(newPage);
 
+  event.preventDefault();
 }
 
-export function setUpPageSelector(pokemons) {
-  const TOTAL_POKEMONS = pokemons.count;
-  const TOTAL_PAGES = Math.ceil(TOTAL_POKEMONS / POKEMONS_LIMIT) + 1;
-  for (let i = 1; i < TOTAL_PAGES; i++) {
+async function handlePageChange(offset) {
+
+  const pageSelected = await getPokemons(offset)
+  const {
+    nextUrl: next,
+    previousUrl: previous,
+  } = pageSelected;
+
+  previousPage = previous;
+  nextPage = next;
+
+  changePage(pageSelected);
+}
+
+export function setUpPageSelector(pokemonList) {
+  const {
+    total: POKEMONS,
+    nextUrl: next,
+    previousUrl: previous,
+  } = pokemonList;
+
+  previousPage = previous;
+  nextPage = next;
+
+  const PAGES = Math.ceil(POKEMONS / POKEMONS_LIMIT) + 1; //
+  for (let i = 1; i < PAGES; i++) { // 
     $pageSelector.appendChild(createSelectorElement(i));
   }
 }
@@ -38,26 +60,11 @@ function createSelectorElement(pageNumber) {
   return $item;
 }
 
-async function changePage(offset, limit) {
-  const pokemons = await getPokemons(offset, limit);
-  setNewPokemonGrid(pokemons)
-}
-
-export function updatePageSelectorValue(page) {
-  const newValue = (getOffset(page) / POKEMONS_LIMIT) + 2;
-  $pageSelector.value = newValue;
-}
-
-export function updatePageVariables(previous, next) {
-  previousPage = previous;
-  nextPage = next;
-}
-
 async function showPreviousPage() {
   if (previousPage) {
     $previousBtn.classList.remove('is-error');
     $nextBtn.classList.remove('is-error');
-    setNewPokemonGrid(await getPokemons(getOffset(previousPage)));
+    await handlePageChange(getOffset(previousPage));
   } else {
     $previousBtn.classList.add('is-error');
   }
@@ -66,7 +73,7 @@ async function showPreviousPage() {
 async function showNextPage() {
   if (nextPage) {
     $previousBtn.classList.remove('is-error');
-    setNewPokemonGrid(await getPokemons(getOffset(nextPage)));
+    await handlePageChange(getOffset(nextPage));
   } else {
     $nextBtn.classList.add('is-error');
   }

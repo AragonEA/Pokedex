@@ -1,22 +1,4 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pokedex</title>
-    <link rel="shortcut icon" href="./src/assets/img/pokemon_icon.svg" type="image/x-icon">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P">
-    <link rel="stylesheet" href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" />
-    <link rel="stylesheet" href="src/css/main.css">
-</head>
-
-<body>
-    <header>
-        <img id="logo" src="./src/assets/img/pokemonLogo.png" alt="pokedex logo">
-    </header>
+export default ` 
     <main>
         <div class="container">
 
@@ -76,11 +58,4 @@
             </section>
 
         </div>
-    </main>
-    <footer>
-        <a href="https://github.com/AragonEA" target="_blank">AragonEA<i class="nes-icon github is-small"></i></a>
-    </footer>
-    <script src="src/js/main.js" type="module"></script>
-</body>
-
-</html>
+    </main>`

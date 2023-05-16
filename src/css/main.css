@@ -14,7 +14,7 @@ body {
 }
 
 body {
-  background: no-repeat url("../ui/img/pokemon-background.jpg");
+  background: no-repeat url("../assets/img/pokemonBackground.jpg");
 }
 
 p {
@@ -70,9 +70,10 @@ footer {
   min-height: 100%;
 }
 
-.grid-item {
-  height: 0;
-}
+.grid-item > p{
+text-transform: capitalize;
+} 
+
 
 .pokemon-icon {
   width: 96px;
@@ -87,6 +88,11 @@ footer {
 /*                      */
 
 /* Pokemon-Section */
+
+#pokemon-type{
+text-transform: uppercase;
+}
+
 #pokemon-img {
   height: 40vh;
   width: 100%;
@@ -131,6 +137,10 @@ footer {
 
 #movements>li {
   width: 20%;
+}
+
+#movements>li, #abilities>li {
+  text-transform: uppercase;
 }
 
 #abilities {
@@ -247,7 +257,7 @@ footer {
     grid-template-columns: 1fr 1fr 1fr;
   }
 
-  .grid-item {
+  .grid-item,  .grid-item > p {
     height: fit-content;
   }
 
@@ -257,6 +267,7 @@ footer {
 
   #movements>li {
     width: 33%;
+    text-align: center;
   }
 }
 
