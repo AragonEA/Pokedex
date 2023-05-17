@@ -34,8 +34,13 @@ async function handlePageChange(offset) {
   previousPage = previous;
   nextPage = next;
 
+  updatePageSelectorValue(offset)
   changePage(pageSelected);
 }
+
+function updatePageSelectorValue(offset){
+  $form[`selector`].value =  (offset / POKEMONS_LIMIT) + 1;
+  }
 
 export function setUpPageSelector(pokemonList) {
   const {
