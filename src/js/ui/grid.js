@@ -33,14 +33,6 @@ function createIconElement(id, pokemonName) {
     return $pokemonIcon;
 }
 
-$pokemonGrid.addEventListener('click', (event) => {
-    const $pokemonSelected = event.target;
-    if ('pokemonName' in $pokemonSelected.dataset){
-        setNewPokemon($pokemonSelected.dataset['pokemonName'])
-    } else{
-        setNewPokemon($pokemonSelected.textContent)   
-    }
-});
 
 function deletePreviousPokemonGrid() {
     document.querySelectorAll('.grid-item').forEach(item => item.remove());
