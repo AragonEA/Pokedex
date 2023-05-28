@@ -19,6 +19,6 @@ function showPokemon(pokemon) {
     
 } 
 
-export async function setNewPokemon(pokemon) {
+export async function showNewPokemon(pokemon) {
     showPokemon(await getPokemon(pokemon));
 }
