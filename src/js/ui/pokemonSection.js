@@ -7,8 +7,8 @@ const $pokemonType = document.querySelector('#pokemon-type');
 const $pokemonHeight = document.querySelector('#pokemon-height');
 const $pokemonWeight = document.querySelector('#pokemon-weight');
 
-export function showPokemon(pokemon) {
-
+function showPokemon(pokemon) {
+    
     $pokemonName.textContent = (`${pokemon.name}`).toUpperCase();
     $pokemonID.textContent = (`ID: ${pokemon.id}`)
     $pokemonImg.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`;
