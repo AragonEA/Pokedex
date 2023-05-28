@@ -9,13 +9,13 @@ const $pokemonWeight = document.querySelector('#pokemon-weight');
 
 function showPokemon(pokemon) {
     
-    $pokemonName.textContent = (`${pokemon.name}`).toUpperCase();
+    $pokemonName.textContent = (`${pokemon.name}`);
     $pokemonID.textContent = (`ID: ${pokemon.id}`)
     $pokemonImg.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`;
     $pokemonImg.setAttribute(onerror, "this.src='./assets/img/pokemonNotFound.png'")
     $pokemonType.textContent = 'TYPE: ' + pokemon.types;
-    $pokemonHeight.textContent = (`HEIGHT: ${pokemon.height / 10} M`).toUpperCase();
-    $pokemonWeight.textContent = (`WEIGHT: ${pokemon.weight / 10} KG`).toUpperCase();
+    $pokemonHeight.textContent = (`HEIGHT: ${pokemon.height / 10} M`);
+    $pokemonWeight.textContent = (`WEIGHT: ${pokemon.weight / 10} KG`);
     
 } 
 
