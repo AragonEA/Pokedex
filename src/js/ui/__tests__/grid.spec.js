@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 /// <reference types="Jest" /> 
-import { setNewPokemonGrid } from '../grid';
+import { showNewPokemonGrid } from '../grid';
 
 document.body.innerHTML = `
 <body>
@@ -71,7 +71,7 @@ const pokemonList = {
     ]
 }
 
-setNewPokemonGrid(pokemonList);
+showNewPokemonGrid(pokemonList);
 
 
 const $gridItems = document.querySelectorAll('.grid-item');

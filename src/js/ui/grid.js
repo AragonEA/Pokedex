@@ -1,6 +1,6 @@
 import { showNewPokemon } from './pokemonSection.js';
 
-export function setNewPokemonGrid(pokemonList) {
+export function showNewPokemonGrid(pokemonList) {
     deletePreviousPokemonGrid();
     createPokemonGrid(pokemonList);
 }

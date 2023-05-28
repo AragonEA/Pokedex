@@ -1,5 +1,5 @@
 import { getPokemons } from '../storage/pokemon.js';
-import { setNewPokemonGrid as changePage } from './grid.js';
+import { showNewPokemonGrid as changePage } from './grid.js';
 import { getOffset } from '../utilities/utilities.js';
 
 const POKEMONS_LIMIT = 16
