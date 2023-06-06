@@ -7,20 +7,18 @@ const $pokemonType = document.querySelector('#pokemon-type');
 const $pokemonHeight = document.querySelector('#pokemon-height');
 const $pokemonWeight = document.querySelector('#pokemon-weight');
 
-$pokemonImg.setAttribute('onerror', "javascript:this.src='src/assets/img/pokemonNotFound.png'")
-
-export function showPokemon(pokemon) {
-
-    $pokemonName.textContent = (`${pokemon.name}`).toUpperCase();
+function showPokemon(pokemon) {
+    
+    $pokemonName.textContent = (`${pokemon.name}`);
     $pokemonID.textContent = (`ID: ${pokemon.id}`)
-    $pokemonImg.setAttribute(onerror, "this.src='./assets/img/pokemonNotFound.png'")
     $pokemonImg.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`;
+    $pokemonImg.setAttribute(onerror, "this.src='./assets/img/pokemonNotFound.png'")
     $pokemonType.textContent = 'TYPE: ' + pokemon.types;
-    $pokemonHeight.textContent = (`HEIGHT: ${pokemon.height / 10} M`).toUpperCase();
-    $pokemonWeight.textContent = (`WEIGHT: ${pokemon.weight / 10} KG`).toUpperCase();
+    $pokemonHeight.textContent = (`HEIGHT: ${pokemon.height / 10} M`);
+    $pokemonWeight.textContent = (`WEIGHT: ${pokemon.weight / 10} KG`);
     
 } 
 
-export async function setNewPokemon(pokemon) {
+export async function showNewPokemon(pokemon) {
     showPokemon(await getPokemon(pokemon));
 }

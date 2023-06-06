@@ -104,6 +104,7 @@ text-transform: uppercase;
 }
 
 #pokemon-data {
+  text-transform: uppercase;
   min-width: 35vw;
   min-height: 59vh;
 }

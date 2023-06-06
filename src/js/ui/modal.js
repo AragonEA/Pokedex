@@ -31,6 +31,7 @@ async function showAbilities(pokemonName) {
   const pokemon = await getPokemon(pokemonName)
   deletePreviousAbilities();
 
+  pokemon.abilities.sort();
   pokemon.abilities.forEach(ability => {
     addAbility(ability);
   });
@@ -47,6 +48,7 @@ async function showMovements(pokemonName) {
   const pokemon = await getPokemon(pokemonName)
   deletePreviousMovements();
 
+  pokemon.movements.sort();
   pokemon.movements.forEach(movement => {
     addMovements(movement);
   });
